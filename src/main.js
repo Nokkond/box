@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import App from './App.vue';
-import { message, data } from './data';
+import al from './data copy';
+import { message1, message2 } from './data';
 
 Vue.config.productionTip = false;
 
@@ -8,5 +9,5 @@ new Vue({
   render: (h) => h(App),
 }).$mount('#app');
 
-alert(message);
-alert(data.message);
+al(message1);
+al(message2);

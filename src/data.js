@@ -1,7 +1,2 @@
-export const message = 'Hello Vue';
-
-const data = {
-  message: 'Hello Vue',
-};
-
-export default data;
+export const message1 = 'Hello Vue';
+export const message2 = 'Hello Angular';
