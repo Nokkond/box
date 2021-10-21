@@ -17,8 +17,15 @@
             <ul class="colors colors--black">
               <li class="colors__item">
                 <label class="colors__label">
-                  <input class="colors__radio sr-only" type="radio" name="color-1" value="#73B6EA" checked="">
+                  <input class="colors__radio sr-only" type="radio" value="#73B6EA" v-model="color">
                   <span class="colors__value" style="background-color: #73B6EA;">
+                  </span>
+                </label>
+              </li>
+              <li class="colors__item">
+                <label class="colors__label">
+                  <input class="colors__radio sr-only" type="radio" value="#13B6EA" v-model="color">
+                  <span class="colors__value" style="background-color: #13B6EA;">
                   </span>
                 </label>
               </li>
@@ -27,6 +34,11 @@
 </template>
 <script>
 export default {
+  data() {
+    return {
+      color: '#73B6EA',
+    };
+  },
   props: ['product_image', 'product_title', 'product_price'],
 };
 </script>
