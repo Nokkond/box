@@ -2,14 +2,14 @@ export default [
   {
     id: 1,
     categoryId: 1,
-    colorId: 1,
+    colorId: [1, 2, 3],
     title: 'Радионяня Motorola MBP16',
     price: 1690,
     image: '/img/radio.jpg',
   },
   {
     id: 2,
-    colorId: 1,
+    colorId: [1, 2, 4],
     categoryId: 1,
     title: 'Радионяня Motorola MBP16',
     price: 2690,
@@ -17,7 +17,7 @@ export default [
   },
   {
     id: 3,
-    colorId: 2,
+    colorId: [1, 3],
     categoryId: 2,
     title: 'Радионяня Motorola MBP16',
     price: 3690,
@@ -25,7 +25,7 @@ export default [
   },
   {
     id: 4,
-    colorId: 2,
+    colorId: [3],
     categoryId: 2,
     title: 'Радионяня Motorola MBP16',
     price: 4690,
@@ -33,7 +33,7 @@ export default [
   },
   {
     id: 5,
-    colorId: 3,
+    colorId: [1, 2, 3],
     categoryId: 2,
     title: 'Радионяня Motorola MBP16',
     price: 5690,
@@ -41,7 +41,7 @@ export default [
   },
   {
     id: 6,
-    colorId: 3,
+    colorId: [1, 2, 3],
     categoryId: 3,
     title: 'Радионяня Motorola MBP16',
     price: 6690,
@@ -49,7 +49,7 @@ export default [
   },
   {
     id: 7,
-    colorId: 4,
+    colorId: [1, 2, 5],
     categoryId: 3,
     title: 'Радионяня Motorola MBP16',
     price: 7690,
@@ -57,7 +57,7 @@ export default [
   },
   {
     id: 8,
-    colorId: 5,
+    colorId: [2, 6],
     categoryId: 4,
     title: 'Радионяня Motorola MBP16',
     price: 8690,
@@ -65,7 +65,7 @@ export default [
   },
   {
     id: 9,
-    colorId: 6,
+    colorId: [4],
     categoryId: 5,
     title: 'Радионяня Motorola MBP16',
     price: 9690,

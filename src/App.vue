@@ -49,8 +49,9 @@ export default {
       if (this.filterCategoryId > 0) {
         filteredProducts = filteredProducts.filter((product) => product.categoryId === this.filterCategoryId);
       }
-      if (this.filterColorId > 0) {
-        filteredProducts = filteredProducts.filter((product) => product.colorId === this.filterColorId);
+      if (this.filterColorId !== 0) {
+        console.log(filteredProducts.colorId);
+        filteredProducts = filteredProducts.filter((product) => product.colorId.find((e) => e === this.filterColorId));
       }
       return filteredProducts;
     },

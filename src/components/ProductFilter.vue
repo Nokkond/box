@@ -20,7 +20,7 @@
             <label class="form__label form__label--select">
               <select class="form__select" type="text" name="category"  v-model="currentCategoryId">
                 <option value="0">Все категории</option>
-                <option value="value2" v-for="category in categories" :key="category.id">{{ category.title }}</option>
+                <option :value="category.id" v-for="category in categories" :key="category.id">{{ category.title }}</option>
               </select>
             </label>
           </fieldset>
@@ -31,8 +31,8 @@
             <ul class="colors" >
               <li class="colors__item" v-for="color in colors" :key="color.id" >
                 <label class="colors__label" >
-                  <input class="colors__radio sr-only"  name="color" v-model="currentColorId" @click.prevent="value=color.title">
-                  <span  value="1" class="colors__value" :style="{'background-color':color.title}" >
+                  <input class="colors__radio sr-only" type="radio" name="color" @change="changeWatch(color.id)">
+                  <span  value="0" class="colors__value" :style="{'background-color':color.title}" >
                   </span>
                 </label>
               </li>
@@ -146,7 +146,7 @@ export default {
     categoryId(value) {
       this.currentCategoryId = value;
     },
-    colorId(value) {
+    changeWatch(value) {
       this.currentColorId = value;
     },
   },
@@ -161,6 +161,10 @@ export default {
       this.$emit('update:priceFrom', 0);
       this.$emit('update:priceTo', 0);
       this.$emit('update:categoryId', 0);
+      this.$emit('update:colorId', 0);
+    },
+    changeWatch(value) {
+      this.currentColorId = value;
     },
   },
 };
