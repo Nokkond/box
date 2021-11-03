@@ -1,8 +1,6 @@
 <template>
          <ul class="catalog__list">
-          <li class="catalog__item" v-for="product in products" :key="product.id">
-          <ProductItem :product_image='product.image' :product_title='product.title' :product_price='product.price' :product-color='product.colorId'/>
-          </li>
+          <ProductItem class="catalog__item" v-for="product in products" :key="product.id" :product_image='product.image' :product_title='product.title' :product_price='product.price' :product-color='product.colorId' @gotoPage="(pageName, pageParams) => $emit('gotoPage', pageName, pageParams)"/>
         </ul>
 </template>
 <script>
