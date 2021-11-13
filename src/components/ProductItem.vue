@@ -15,10 +15,10 @@
             </span>
 
             <ul class="colors colors--black">
-              <li class="colors__item" v-for="color in product.colorId" :key="color">
+              <li class="colors__item" v-for="color in product.colors" :key="color.id">
                 <label class="colors__label">
                   <input class="colors__radio sr-only" name="color" type="radio">
-                  <span class="colors__value" :style="{'background-color': colorconnect(color)}" >
+                  <span class="colors__value" :style="{'background-color': colorconnect(color.id)}" >
                   </span>
                 </label>
               </li>

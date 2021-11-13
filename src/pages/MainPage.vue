@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import products from '@/data/products';
 import ProductList from '@/components/ProductList.vue';
 import BasePagination from '@/components/BasePagination.vue';
@@ -34,6 +35,7 @@ export default {
       filterColorId: 0,
       page: 1,
       productsPerPage: 3,
+      productsData: null,
     };
   },
   computed: {
@@ -55,12 +57,28 @@ export default {
       return filteredProducts;
     },
     products() {
-      const start = (this.page - 1) * this.productsPerPage;
-      return this.filteredProducts.slice(start, start + this.productsPerPage);
+      return this.productsData ? this.productsData.items.map((product) => ({
+        ...product,
+        image: product.image.file.url,
+      })) : [];
     },
     countProducts() {
-      return this.filteredProducts.length;
+      return this.productsData ? this.productsData.pagination.total : 0;
     },
+  },
+  methods: {
+    loadProducts() {
+      axios.get(`https://vue-study.skillbox.cc/api/products?page=${this.page}&limit=${this.productsPerPage}`)
+        .then((response) => { this.productsData = response.data; });
+    },
+  },
+  watch: {
+    page() {
+      this.loadProducts();
+    },
+  },
+  created() {
+    this.loadProducts();
   },
 };
 </script>
