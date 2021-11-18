@@ -169,7 +169,7 @@ export default {
       this.currentColorId = value;
     },
     loadCategories() {
-      axios.get('https://vue-study.skillbox.cc/api/productCategories')
+      axios.get(`${API_BASE_URL}/api/productCategories`)
         .then((response) => { this.categoriesData = response.data; });
     },
   },
