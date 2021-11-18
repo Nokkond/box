@@ -11,6 +11,8 @@ module.exports = {
     parser: 'babel-eslint',
   },
   rules: {
+    "prefer-destructuring": ["error", {"object": true, "array": false}],
+    "enforceForRenamedProperties": "off",
     "import/prefer-default-export": "off",
     "object-shorthand": 0,
     'max-len': ["error", { "code": 150000 }],
