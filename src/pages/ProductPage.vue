@@ -179,6 +179,7 @@
 
 <script>
 import axios from 'axios';
+import { mapActions } from 'vuex';
 import gotoPage from '@/helpers/gotoPage';
 import numberFormat from '@/helpers/numberFormat';
 import { API_BASE_URL } from '../config';
@@ -210,12 +211,11 @@ export default {
     },
   },
   methods: {
+    ...mapActions(['addProductToCart']),
+
     gotoPage,
     addToCart() {
-      this.$store.commit(
-        'addProductToCart',
-        { productId: this.product.id, amount: this.productAmount },
-      );
+      this.addProductToCart({ productId: this.product.id, amount: this.productAmount });
     },
     loadProduct() {
       this.productLoading = true;

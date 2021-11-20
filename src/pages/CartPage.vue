@@ -5,6 +5,7 @@
   </div>
 
   <main class="content container">
+
     <div class="content__top">
       <ul class="breadcrumbs">
         <li class="breadcrumbs__item">
@@ -31,6 +32,8 @@
       <form class="cart__form form" action="#" method="POST">
         <div class="cart__field">
           <ul class="cart__list">
+            <div v-if="productsLoading">Загрузка товаров...</div>
+            <div v-if="!item">Произлошла ошибка при загрузке товаров <button @click.prevent="loadProducts">Попробовать еще раз</button></div>
             <CartItem v-for="item in products" :key="item.productId" :item="item" />
           </ul>
         </div>
@@ -164,6 +167,7 @@ export default {
     totalProducts() {
       return this.cartTotalProducts;
     },
+
   },
 };
 </script>
