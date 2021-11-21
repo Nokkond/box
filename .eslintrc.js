@@ -1,5 +1,5 @@
 module.exports = {
-  root: true,
+  root: false,
   env: {
     node: true,
   },
@@ -11,6 +11,7 @@ module.exports = {
     parser: 'babel-eslint',
   },
   rules: {
+    "arrow-body-style": ["error", "as-needed"],
     "prefer-destructuring": ["error", {"object": false, "array": false}],
     "enforceForRenamedProperties": "off",
     "import/prefer-default-export": "off",

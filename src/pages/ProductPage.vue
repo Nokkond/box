@@ -115,9 +115,12 @@
                 </button>
               </div>
 
-              <button class="button button--primery" type="submit" >
+              <button class="button button--primery" type="submit" :disabled="productAddSending">
                 В корзину
               </button>
+
+            <div v-show="productAdded"> Товар добавлен в корзину</div>
+            <div v-show="productAddSending">Добавляем товар в корзину...</div>
             </div>
           </form>
         </div>
@@ -191,6 +194,8 @@ export default {
       productData: null,
       productLoading: false,
       productLoadingFailed: false,
+      productAdded: false,
+      productAddSending: false,
     };
   },
   filters: {
@@ -215,7 +220,13 @@ export default {
 
     gotoPage,
     addToCart() {
-      this.addProductToCart({ productId: this.product.id, amount: this.productAmount });
+      this.productAdded = false;
+      this.productAddSending = true;
+      this.addProductToCart({ productId: this.product.id, amount: this.productAmount })
+        .then(() => {
+          this.productAdded = true;
+          this.productAddSending = false;
+        });
     },
     loadProduct() {
       this.productLoading = true;
