@@ -1,3 +1,4 @@
+/* eslint-disable */
 <template>
 <div>
   <div style="display: none">
@@ -32,8 +33,7 @@
       <form class="cart__form form" action="#" method="POST">
         <div class="cart__field">
           <ul class="cart__list">
-            <div v-if="productsLoading">Загрузка товаров...</div>
-            <div v-if="!item">Произлошла ошибка при загрузке товаров <button @click.prevent="loadProducts">Попробовать еще раз</button></div>
+            <div v-if="!products">Загрузка товаров...</div>
             <CartItem v-for="item in products" :key="item.productId" :item="item" />
           </ul>
         </div>
@@ -167,7 +167,6 @@ export default {
     totalProducts() {
       return this.cartTotalProducts;
     },
-
   },
 };
 </script>
