@@ -18,7 +18,7 @@
               <li class="colors__item" v-for="color in product.colors" :key="color.id">
                 <label class="colors__label">
                   <input class="colors__radio sr-only" name="color" type="radio">
-                  <span class="colors__value" :style="{'background-color': colorconnect(color.id)}" >
+                  <span class="colors__value" :style="{'background-color': color.code}" >
                   </span>
                 </label>
               </li>
@@ -26,7 +26,7 @@
 </div>
 </template>
 <script>
-import colors from '../data/colors';
+import colorsData from './ProductFilter.vue';
 import gotoPage from '@/helpers/gotoPage';
 import numberFormat from '@/helpers/numberFormat';
 
@@ -37,12 +37,12 @@ export default {
   },
   computed: {
     colors() {
-      return colors;
+      return colorsData;
     },
   },
   methods: {
     colorconnect(colorI) {
-      return colors.find((e) => e.id === colorI)?.title;
+      return colorsData.find((e) => e.id === colorI)?.title;
     },
     gotoPage,
   },
