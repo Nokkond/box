@@ -77,25 +77,15 @@
 
         <div class="cart__block">
           <ul class="cart__orders">
-            <li class="cart__order">
-              <h3>Смартфон Xiaomi Redmi Note 7 Pro 6/128GB</h3>
-              <b>18 990 ₽</b>
-              <span>Артикул: 150030</span>
-            </li>
-            <li class="cart__order">
-              <h3>Гироскутер Razor Hovertrax 2.0ii</h3>
-              <b>4 990 ₽</b>
-              <span>Артикул: 150030</span>
-            </li>
-            <li class="cart__order">
-              <h3>Электрический дрифт-карт Razor Lil’ Crazy</h3>
-              <b>8 990 ₽</b>
-              <span>Артикул: 150030</span>
+            <li class="cart__order" v-for="item in products" :key="item.product.id">
+              <h3>{{item.product.title}}</h3>
+              <b>{{item.product.price | numberFormat}} ₽</b>
+              <span>Артикул: {{item.product.id}}</span>
             </li>
           </ul>
           <div class="cart__total">
             <p>Доставка: <b>500 ₽</b></p>
-            <p>Итого: <b>3</b> товара на сумму <b>37 970 ₽</b></p>
+            <p>Итого: <b>{{amount}}</b> товара на сумму <b>{{totalPrice | numberFormat}} ₽</b></p>
           </div>
         </div>
       </form>
@@ -104,12 +94,26 @@
 </template>
 
 <script>
+import numberFormat from '@/helpers/numberFormat';
+
 export default {
+  filters: { numberFormat },
   created() {
     if (this.$store.state.orderInfo && this.$store.state.orderInfo === this.$route.params.id) {
       return;
     }
     this.$store.dispatch('loadOrderInfo', this.$route.params.id);
+  },
+  computed: {
+    products() {
+      return this.$store.state.orderInfo.basket.items;
+    },
+    totalPrice() {
+      return this.$store.state.orderInfo.totalPrice;
+    },
+    amount() {
+      return this.$store.state.orderInfo.basket.items.length;
+    },
   },
 };
 </script>
