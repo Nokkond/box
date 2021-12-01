@@ -78,7 +78,7 @@
         <div class="cart__block">
           <ul class="cart__orders">
             <li class="cart__order" v-for="item in products" :key="item.product.id">
-              <h3>{{item.product.title}}</h3>
+                <h3>{{item.product.title}}</h3>
               <b>{{item.product.price | numberFormat}} ₽</b>
               <span>Артикул: {{item.product.id}}</span>
             </li>
@@ -94,6 +94,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import numberFormat from '@/helpers/numberFormat';
 
 export default {
@@ -105,14 +106,15 @@ export default {
     this.$store.dispatch('loadOrderInfo', this.$route.params.id);
   },
   computed: {
+    ...mapGetters(['orderInfoProducts', 'orderInfoPrice', 'orderTotalProducts']),
     products() {
-      return this.$store.state.orderInfo.basket.items;
-    },
-    totalPrice() {
-      return this.$store.state.orderInfo.totalPrice;
+      return this.orderInfoProducts;
     },
     amount() {
-      return this.$store.state.orderInfo.basket.items.length;
+      return this.orderTotalProducts;
+    },
+    totalPrice() {
+      return this.orderInfoPrice;
     },
   },
 };
