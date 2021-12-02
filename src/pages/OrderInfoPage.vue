@@ -1,5 +1,8 @@
 <template>
-    <main class="content container">
+<div>
+  <main v-if="loading">Загрузка...</main>
+  <main v-else-if="loadingFailed">Ошибка...</main>
+    <main v-else class="content container">
     <div class="content__top">
       <ul class="breadcrumbs">
         <li class="breadcrumbs__item">
@@ -37,7 +40,7 @@
                 Получатель
               </span>
               <span class="dictionary__value">
-                Иванова Василиса Алексеевна
+                {{orderInfoProducts.name}}
               </span>
             </li>
             <li class="dictionary__item">
@@ -45,7 +48,7 @@
                 Адрес доставки
               </span>
               <span class="dictionary__value">
-                Москва, ул. Ленина, 21, кв. 33
+                {{orderInfoProducts.address}}
               </span>
             </li>
             <li class="dictionary__item">
@@ -53,7 +56,7 @@
                 Телефон
               </span>
               <span class="dictionary__value">
-                8 800 989 74 84
+                {{orderInfoProducts.phone}}
               </span>
             </li>
             <li class="dictionary__item">
@@ -61,7 +64,7 @@
                 Email
               </span>
               <span class="dictionary__value">
-                lalala@mail.ru
+                {{orderInfoProducts.email}}
               </span>
             </li>
             <li class="dictionary__item">
@@ -77,7 +80,7 @@
 
         <div class="cart__block">
           <ul class="cart__orders">
-            <li class="cart__order" v-for="item in products" :key="item.product.id">
+            <li class="cart__order" v-for="item in orderInfoProducts.basket.items" :key="item.product.id">
                 <h3>{{item.product.title}}</h3>
               <b>{{item.product.price | numberFormat}} ₽</b>
               <span>Артикул: {{item.product.id}}</span>
@@ -91,6 +94,7 @@
       </form>
     </section>
   </main>
+</div>
 </template>
 
 <script>
@@ -98,18 +102,29 @@ import { mapGetters } from 'vuex';
 import numberFormat from '@/helpers/numberFormat';
 
 export default {
+  data() {
+    return {
+      loading: true,
+      loadingFailed: false,
+    };
+  },
   filters: { numberFormat },
   created() {
-    if (this.$store.state.orderInfo && this.$store.state.orderInfo === this.$route.params.id) {
+    this.loading = true;
+    this.loadingFailed = false;
+    if (this.$store.state.orderInfo && this.$store.state.orderInfo.id === this.$route.params.id) {
+      this.loading = false;
+
       return;
     }
-    this.$store.dispatch('loadOrderInfo', this.$route.params.id);
+    this.$store.dispatch('loadOrderInfo', this.$route.params.id).catch(() => {
+      this.loadingFailed = true;
+    }).then(() => {
+      this.loading = false;
+    });
   },
   computed: {
     ...mapGetters(['orderInfoProducts', 'orderInfoPrice', 'orderTotalProducts']),
-    products() {
-      return this.orderInfoProducts;
-    },
     amount() {
       return this.orderTotalProducts;
     },
